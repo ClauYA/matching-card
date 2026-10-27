@@ -1,28 +1,34 @@
-
+//count and shows in the tags
 let winCount = document.querySelector('.winner span');
 let lostCount = document.querySelector('.losser span');
 let message = document.querySelector('.message');
 
 document.querySelector('.re-do').addEventListener('click', restart);
-//come back to storage images
+//come back to storage images 
 let cards = ['apple.png','frutilla.png','kiwi.png','banana.png','orange.png','apple.png','frutilla.png','kiwi.png','banana.png','orange.png'];
+//inicializamos variables
 let firstCard = null;
 let waiting = false;
-
 let wins=0;
 let losses=0;
 let matches=0;
 
+
 function dealCards(){
+  //we copy the array cards and not destroyed the original array
   const deck = cards.slice();
+  console.log(cards)
+  //restart all the variables
   firstCard = null;
   waiting = false;
   matches = 0;
   message.textContent = '';
-
+  //recorremos todo el tablero
   document.querySelectorAll('.card').forEach((element) =>{
+    //random indice y sacamos ese random indice del tablero
     const randomNumber = Math.floor(Math.random()*deck.length);
     const randomPicture = deck.splice(randomNumber, 1)[0];
+
     element.src = 'css/' + encodeURIComponent(randomPicture);
     element.alt = '';
     element.classList.add('hidden');
@@ -36,7 +42,7 @@ document.querySelectorAll('.flipper').forEach((playable) => {
 
 document.querySelector('.re-do').addEventListener('click', dealCards);
 
-
+//
 function turnOver(event){
   if(waiting) return
   const imgElement = event.currentTarget.querySelector('img');
